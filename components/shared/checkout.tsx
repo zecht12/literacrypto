@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { product } from "../../data/product";
+import React from "react";
 
 declare global {
   interface Window {
@@ -7,8 +6,7 @@ declare global {
   }
 }
 
-const Checkout = () => {
-
+const Checkout = ({ product }) => {
   const checkout = async () => {
     const data = {
       id: product.id,
@@ -24,7 +22,7 @@ const Checkout = () => {
 
     const requestData = await response.json();
 
-    window.snap.pay(requestData.token)
+    window.snap.pay(requestData.token);
   };
 
   return (
