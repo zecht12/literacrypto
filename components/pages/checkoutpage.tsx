@@ -1,15 +1,10 @@
 /* eslint-disable @next/next/no-async-client-component */
+'use client'
 
 import { db } from "@/lib/db";
-import Checkout from "../shared/checkout";
-
-async function getKelas() {
-  const data = await db.kelas.findMany();
-  return data;
-}
 
 const CheckoutPage = async () => {
-  const kelas = await getKelas();
+  const kelas = await db.kelas.findMany()
 
   return (
     <div>
@@ -21,7 +16,6 @@ const CheckoutPage = async () => {
             <p>Name: {item.name}</p>
             <p>Price: {item.price}</p>
             <p>Description: {item.description}</p>
-            <Checkout price={item.name} itemName={item.name} />
           </li>
         ))}
       </ul>
