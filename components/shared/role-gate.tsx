@@ -1,6 +1,6 @@
 "use client"
 
-import { useCurrentRole } from "@/hooks/use-current-role"
+import { useCurrentRole } from "../../hooks/use-current-role"
 import { UserRole } from "@prisma/client"
 import { notFound } from "next/navigation"
 

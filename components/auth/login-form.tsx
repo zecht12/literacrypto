@@ -5,13 +5,13 @@ import { useForm } from "react-hook-form";
 import { Form, FormControl, FormField, FormLabel, FormItem, FormMessage } from "../ui/form";
 import { useSearchParams } from "next/navigation";
 import * as z from "zod";
-import { LoginSchema } from "@/schemas";
+import { LoginSchema } from "../../schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { FormError } from "../login-error";
 import { FormSuccess } from "../login-success";
-import { login } from "@/actions/login";
+import { login } from "../../actions/login";
 import { useState, useTransition } from "react";
 import Link from "next/link";
 

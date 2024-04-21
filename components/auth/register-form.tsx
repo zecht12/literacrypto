@@ -4,13 +4,13 @@ import { CardWrapper } from "./card-wrapper";
 import { useForm } from "react-hook-form";
 import { Form, FormControl, FormField, FormLabel, FormItem, FormMessage } from "../ui/form";
 import * as z from "zod";
-import { RegisterSchema } from "@/schemas";
+import { RegisterSchema } from "../../schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { FormError } from "../login-error";
 import { FormSuccess } from "../login-success";
-import { register } from "@/actions/register";
+import { register } from "../../actions/register";
 import { useState, useTransition } from "react";
 
 export const RegisterForm = () => {

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Poppins } from 'next/font/google'
 import { SessionProvider } from 'next-auth/react'
-import { auth } from '@/auth'
+import { auth } from '../auth'
 import './globals.css'
 
 const inter = Poppins({

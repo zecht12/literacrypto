@@ -1,4 +1,4 @@
-import CheckoutPage from '@/components/pages/checkoutpage'
+import CheckoutPage from '../components/pages/checkoutpage'
 
 export default function Home() {
     

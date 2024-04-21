@@ -1,16 +1,18 @@
-import { db } from '@/lib/db';
-import { NextApiRequest, NextApiResponse } from 'next';
+import { NextRequest, NextResponse } from 'next/server';
+import { PrismaClient } from '@prisma/client';
 
-export default async function handler(req:NextApiRequest, res:NextApiResponse) {
-    if (req.method === 'GET') {
-        try {
-            const kelas = await db.kelas.findMany();
-            res.status(200).json(kelas);
-        } catch (error) {
-            console.error('Error fetching data:', error);
-            res.status(500).json({ error: 'Internal server error' });
+const prisma = new PrismaClient();
+
+export default async function GET(req: NextRequest) {
+    try {
+        if (req.method !== 'GET') {
+            return NextResponse.json({ error: 'Method Not Allowed' }, { status: 405 });
         }
-    } else {
-        res.status(405).json({ error: 'Method Not Allowed' });
+
+        const kelas = await prisma.kelas.findMany();
+        return NextResponse.json(kelas);
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
     }
 }

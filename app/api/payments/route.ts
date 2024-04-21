@@ -1,5 +1,4 @@
-import { MidtransClient } from "midtrans-node-client";
-import { NextRequest } from "next/server";
+import { MidtransClient } from 'midtrans-node-client'
 
 let snap = new MidtransClient.Snap({
     isProduction: false,
@@ -7,18 +6,18 @@ let snap = new MidtransClient.Snap({
     clientKey: process.env.NEXT_PUBLIC_CLIENT,
 });
 
-export async function POST(request:NextRequest) {
-    const { id, name, price, quantity } = await request.json();
+export async function POST(request) {
+    const { id, productName, price, quantity } = await request.json();
 
     let parameter = {
         item_details: {
-            name: name,
-            price: price,
-            quantity: quantity,
+        name: productName,
+        price: price,
+        quantity: quantity,
         },
         transaction_details: {
-            order_id: id,
-            gross_amount: price * quantity,
+        order_id: id,
+        gross_amount: price * quantity,
         },
     };
 

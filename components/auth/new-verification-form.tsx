@@ -3,7 +3,7 @@ import { CardWrapper } from "./card-wrapper"
 import { BeatLoader } from "react-spinners"
 import { useSearchParams } from "next/navigation"
 import { useCallback, useEffect, useState } from "react"
-import { newVerification } from "@/actions/new-verification"
+import { newVerification } from "../../actions/new-verification"
 import { FormError } from "../login-error"
 import { FormSuccess } from "../login-success"
 

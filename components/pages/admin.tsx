@@ -3,7 +3,7 @@
 import React from 'react'
 import RoleGate from '../shared/role-gate'
 import { UserRole } from '@prisma/client'
-import { logout } from '@/actions/logout'
+import { logout } from '../../actions/logout'
 import { Button } from '../ui/button'
 
 const AdminPage= () => {

@@ -1,4 +1,4 @@
-import AdminPage from '@/components/pages/admin'
+import AdminPage from '../../../components/pages/admin'
 import React from 'react'
 
 const Admin = () => {

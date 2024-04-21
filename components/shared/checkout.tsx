@@ -1,48 +1,43 @@
-"use client";
+import React, { useState } from "react";
+import { product } from "../../data/product";
 
-import { Button } from "../ui/button";
-import { v4 as uuidv4 } from 'uuid'
+declare global {
+  interface Window {
+    snap: any;
+  }
+}
 
-const Checkout = ({ price, name }: { price: string; name: string }) => {
+const Checkout = () => {
 
-  const handleSubscribe = async () => {
-    try {
-      const response = await fetch("/api/payments", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          item_details: {
-            name: name,
-            price: price,
-            quantity: 1,
-          },
-          transaction_details: {
-            order_id: uuidv4(),
-            gross_amount: Number(price) * 1,
-          },
-        }),
-      });
-      if (response.ok) {
-        const data = await response.json();
-        console.log("Payment Success:", data);
-        // setPaymentStatus("Payment Successful");
-      } else {
-        console.error("Failed to process payment");
-        // setPaymentStatus("Payment Failed");
-      }
-    } catch (error) {
-      console.error("Error processing payment:", error);
-      // setPaymentStatus("Payment Error");
-    }
+  const checkout = async () => {
+    const data = {
+      id: product.id,
+      productName: product.name,
+      price: product.price,
+      quantity: 1,
+    };
+
+    const response = await fetch("/api/payments", {
+      method: "POST",
+      body: JSON.stringify(data),
+    });
+
+    const requestData = await response.json();
+
+    window.snap.pay(requestData.token)
   };
 
   return (
-    <div>
-      <h1>Main Page</h1>
-      <Button onClick={handleSubscribe}>Subscribe</Button>
-    </div>
+    <>
+      <div className="flex items-center justify-between">
+        <button
+          className="rounded bg-indigo-500 p-4 text-sm font-medium transition hover:scale-105"
+          onClick={checkout}
+        >
+          Checkout
+        </button>
+      </div>
+    </>
   );
 };
 

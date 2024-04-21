@@ -1,47 +1,51 @@
-'use client'
+"use client";
 
-import { useEffect, useState } from 'react';
-import Checkout from '../shared/checkout';
-import { Kelas } from '@prisma/client';
+import Image from "next/image";
+import { product } from "../../data/product";
+import Checkout from "../shared/checkout";
+import { useEffect } from "react";
 
-const CheckoutPage = () => {
-  const [kelas, setKelas] = useState<Kelas[]>([]);
-
+export default function Home() {
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('/api/kelas',{
-          method: 'GET'
-        });
-        if (!response.ok) {
-          throw new Error('Failed to fetch data');
-        }
-        const data = await response.json();
-        setKelas(data);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
+    const snapScript = "https://app.sandbox.midtrans.com/snap/snap.js";
 
-    fetchData();
+    const clientKey = process.env.NEXT_PUBLIC_CLIENT;
+
+    const script = document.createElement("script");
+    script.src = snapScript;
+    script.setAttribute("data-client-key", clientKey);
+    script.async = true;
+
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
   }, []);
 
   return (
-    <div>
-      <h1>Main Page</h1>
-      <h2>Kelas</h2>
-      <ul>
-        {kelas.map((item) => (
-          <li key={item.id}>
-            <p>Name: {item.name}</p>
-            <p>Price: {item.discountPrice}</p>
-            <p>Description: {item.description}</p>
-            <Checkout name={item.name} price={item.discountPrice} />
-          </li>
-        ))}
-      </ul>
-    </div>
+    <>
+      <main className="max-w-xl mx-auto sm:p-16">
+        <div className="flex flex-col">
+          <Image
+            src={product.image}
+            alt="..."
+            width={250}
+            height={250}
+            className="w-full object-cover"
+          />
+          <div className="border border-gray-100 bg-white p-6">
+            <h3 className="mt-4 text-lg font-medium text-gray-900">
+              {product.name}
+            </h3>
+            <p className="mt-1.5 text-sm text-gray-700">Rp {product.price}</p>
+            <p className="py-4 text-sm text-gray-700 text-justify">
+              {product.description}
+            </p>
+            <Checkout />
+          </div>
+        </div>
+      </main>
+    </>
   );
-};
-
-export default CheckoutPage;
+}
