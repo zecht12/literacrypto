@@ -11,7 +11,6 @@ export default async function handler(req:NextApiRequest, res:NextApiResponse) {
             res.status(500).json({ error: 'Internal server error' });
         }
     } else {
-        const kelas = await db.kelas.findMany();
-            res.status(200).json(kelas);
+        res.status(405).json({ error: 'Method Not Allowed' });
     }
 }
