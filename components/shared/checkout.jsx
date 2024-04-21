@@ -11,7 +11,6 @@ const Checkout = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          // Add payload data for payment transaction
         }),
       });
       if (response.ok) {

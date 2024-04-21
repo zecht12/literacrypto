@@ -1,5 +1,7 @@
-import { db } from "@/lib/db";
+/* eslint-disable @next/next/no-async-client-component */
+'use client'
 
+import { db } from "@/lib/db";
 
 const CheckoutPage = async () => {
   const kelas = await db.kelas.findMany()

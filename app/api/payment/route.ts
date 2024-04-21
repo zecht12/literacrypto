@@ -11,17 +11,19 @@ const snap = new MidtransClient.Snap({
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method === 'POST') {
         try {
-            const { id, productName, price, quantity } = req.body;
+
+            //req.body failed
+            const { id, name, discountPrice } = req.body;
 
             const parameter = {
                 item_details: {
-                    name: productName,
-                    price: price,
-                    quantity: quantity,
+                    name: name,
+                    price: discountPrice,
+                    quantity: 1,
                 },
                 transaction_details: {
                     order_id: id,
-                    gross_amount: price * quantity,
+                    gross_amount: discountPrice * 1,
                 },
             };
 
