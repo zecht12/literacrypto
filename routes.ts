@@ -26,7 +26,7 @@
      * Routes that start with this prefix are used for API authentication purposes
      * @type {string}
      */
-    export const apiAuthPrefix = "/api/auth" && "/api/payment";
+    export const apiAuthPrefix = "/api/auth";
     
     /**
      * The default redirect path after logging in

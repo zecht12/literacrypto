@@ -1,10 +1,30 @@
-/* eslint-disable @next/next/no-async-client-component */
 'use client'
 
-import { db } from "@/lib/db";
+import { useEffect, useState } from 'react';
+import Checkout from '../shared/checkout';
+import { Kelas } from '@prisma/client';
 
-const CheckoutPage = async () => {
-  const kelas = await db.kelas.findMany()
+const CheckoutPage = () => {
+  const [kelas, setKelas] = useState<Kelas[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('/api/kelas',{
+          method: 'GET'
+        });
+        if (!response.ok) {
+          throw new Error('Failed to fetch data');
+        }
+        const data = await response.json();
+        setKelas(data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <div>
@@ -14,8 +34,9 @@ const CheckoutPage = async () => {
         {kelas.map((item) => (
           <li key={item.id}>
             <p>Name: {item.name}</p>
-            <p>Price: {item.price}</p>
+            <p>Price: {item.discountPrice}</p>
             <p>Description: {item.description}</p>
+            <Checkout name={item.name} price={item.discountPrice} />
           </li>
         ))}
       </ul>
