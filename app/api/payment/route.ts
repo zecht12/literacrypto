@@ -1,49 +1,42 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import { MidtransClient } from "midtrans-node-client";
-import { db } from "@/lib/db";
+import { NextApiRequest, NextApiResponse } from 'next';
+import { MidtransClient } from 'midtrans-node-client';
+import { db } from '@/lib/db';
 
 const snap = new MidtransClient.Snap({
-  isProduction: false,
-  serverKey: process.env.SECRET,
-  clientKey: process.env.NEXT_PUBLIC_CLIENT,
+    isProduction: false,
+    serverKey: process.env.SECRET,
+    clientKey: process.env.NEXT_PUBLIC_CLIENT,
 });
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse,
-) {
-  if (req.method === "POST") {
-    try {
-      //req.body failed
-      const { id, name, discountPrice } = req.body;
-      // check if the req body is empty
-      if (!id) {
-        res.status(400).json({ message: "Bad request" });
-        console.log("The request body id is empty");
-      }
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+    if (req.method === 'POST') {
+        try {
 
-      const parameter = {
-        item_details: {
-          name: name,
-          price: discountPrice,
-          quantity: 1,
-        },
-        transaction_details: {
-          order_id: id,
-          gross_amount: discountPrice * 1,
-        },
-      };
+            //req.body failed
+            const { id, name, discountPrice } = req.body;
 
-      const token = await snap.createTransactionToken(parameter);
+            const parameter = {
+                item_details: {
+                    name: name,
+                    price: discountPrice,
+                    quantity: 1,
+                },
+                transaction_details: {
+                    order_id: id,
+                    gross_amount: discountPrice * 1,
+                },
+            };
 
-      console.log(token);
+            const token = await snap.createTransactionToken(parameter);
 
-      res.status(200).json({ token });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: "Internal server error" });
+            console.log(token);
+
+            res.status(200).json({ token });
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ error: 'Internal server error' });
+        }
+    } else {
+        res.status(405).json({ error: 'Method Not Allowed' });
     }
-  } else {
-    res.status(405).json({ error: "Method Not Allowed" });
-  }
 }
