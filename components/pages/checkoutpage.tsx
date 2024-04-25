@@ -1,12 +1,35 @@
 "use client"
 
-import Image from "next/image";
-import { product } from "../../data/product";
+import { useEffect, useState } from "react";
+import { fetchProducts } from "../../data/product";
+import { Card, CardContent, CardFooter, CardHeader } from "../ui/card";
 import Checkout from "../shared/checkout";
-import { useEffect } from "react";
+
+
+interface Product {
+  id: string;
+  name: string;
+  price: string;
+  description: string;
+}
+
+declare global {
+  interface Window {
+    snap: any;
+  }
+}
 
 export default function Home() {
+  const [products, setProducts] = useState<Product[]>([]);
+
   useEffect(() => {
+    fetchProducts()
+    .then((fetchedProducts: Product[]) => {
+      setProducts(fetchedProducts);
+    })
+    .catch((error) => {
+      console.error("Error fetching products:", error);
+    });
     const snapScript = "https://app.sandbox.midtrans.com/snap/snap.js";
     const clientKey = process.env.NEXT_PUBLIC_CLIENT;
 
@@ -23,30 +46,25 @@ export default function Home() {
   }, []);
 
   return (
-    <>
-      <main className="max-w-xl mx-auto sm:p-16">
-        {product.map((product) => (
-          <div key={product.id} className="flex flex-col">
-            <Image
-              src={product.image}
-              alt="..."
-              width={250}
-              height={250}
-              className="w-full object-cover"
-            />
-            <div className="border border-gray-100 bg-white p-6">
-              <h3 className="mt-4 text-lg font-medium text-gray-900">
-                {product.name}
-              </h3>
-              <p className="mt-1.5 text-sm text-gray-700">Rp {product.price}</p>
-              <p className="py-4 text-sm text-gray-700 text-justify">
-                {product.description}
-              </p>
-              <Checkout product={product} />
-            </div>
-          </div>
-        ))}
-      </main>
-    </>
+    <main className="w-full mx-auto sm:p-16 flex justify-evenly items-center">
+      {products.map((product) => (
+        <Card key={product.id}>
+          <CardHeader>
+            <h3 className="mt-4 text-lg font-medium text-gray-900">
+              {product.name}
+            </h3>
+          </CardHeader>
+          <CardContent>
+            <p className="mt-1.5 text-sm text-gray-700">Rp {product.price}</p>
+            <p className="py-4 text-sm text-gray-700">
+              {product.description}
+            </p>
+          </CardContent>
+          <CardFooter className='flex items-center justify-center'>
+            <Checkout product={product} />
+          </CardFooter>
+        </Card>
+      ))}
+    </main>
   );
 }
