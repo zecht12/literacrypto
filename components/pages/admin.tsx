@@ -1,72 +1,165 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import RoleGate from '../shared/role-gate';
 import { Transaction, User, UserRole } from '@prisma/client';
-import { logout } from '../../actions/logout';
-import { Button } from '../ui/button';
 import { db } from '../../lib/db';
+import CardLineChart from '../shared/card-line-chart';
+import CardBarChart from '../shared/card-bar-chart';
+import CardBarChartChannel from '../shared/card-bar-chart-channel';
 
-const AdminPage = () => {
-    const [users, setUsers] = useState([]);
-    const [transactions, setTransactions] = useState([]);
+const AdminPage = async () => {
+    const fetchedUsers = await db.user.findMany();
+    const fetchedTransactions = await db.transaction.findMany();
 
-    useEffect(() => {
-        async function fetchData() {
-            const fetchedUsers = await db.user.findMany();
-            const fetchedTransactions = await db.transaction.findMany();
-            setUsers(fetchedUsers);
-            setTransactions(fetchedTransactions);
-        }
-        fetchData();
-    }, []);
+    const computeTotalTransactionsByMonth = () => {
+        const totalTransactionsByMonth = Array(12).fill(0);
 
-    const handleLogout = () => {
-        logout();
+        fetchedTransactions.forEach((transaction) => {
+            const month = new Date(transaction.Date_time).getMonth();
+            totalTransactionsByMonth[month] += transaction.Amount;
+        });
+
+        return totalTransactionsByMonth;
+    };
+
+    const lineChartData = {
+        labels: [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December"
+        ],
+        datasets: [
+            {
+                label: new Date().getFullYear(),
+                backgroundColor: "#3182ce",
+                borderColor: "#3182ce",
+                data: computeTotalTransactionsByMonth(),
+                fill: false,
+            },
+            {
+                label: new Date().getFullYear() + 1,
+                backgroundColor: "#edf2f7",
+                borderColor: "#edf2f7",
+                data: computeTotalTransactionsByMonth(),
+                fill: false,
+            }
+        ]
+    };
+
+    const product1Amounts = fetchedTransactions.filter(transaction => transaction.Amount === "350000").length;
+    const product2Amounts = fetchedTransactions.filter(transaction => transaction.Amount === "250000").length;
+
+    const barChartData = {
+        labels: ["Product 1", "Product 2"],
+        datasets: [
+            {
+                label: "Transactions",
+                backgroundColor: ["#4a5568", "#3182ce"],
+                borderColor: ["#4a5568", "#3182ce"],
+                data: [product1Amounts, product2Amounts],
+                barThickness: 50,
+            }
+        ],
+    };
+
+    const channels = fetchedTransactions.reduce((acc, transaction) => {
+        acc[transaction.Channel] = (acc[transaction.Channel] || 0) + 1;
+        return acc;
+    }, {});
+
+    const barChartChannelData = {
+        labels: Object.keys(channels),
+        datasets: [
+            {
+                label: 'Transaction Counts',
+                backgroundColor: '#4a5568',
+                borderColor: '#4a5568',
+                data: Object.values(channels),
+                barThickness: 50,
+            },
+        ],
     };
 
     return (
-        <div className="p-4">
+        <div className="bg-black text-white min-h-screen w-full py-8 px-4">
             <RoleGate allowedRole={UserRole.ADMIN}>
-                <div className="mb-8">
-                    <h1 className="text-2xl font-bold mb-4 text-center text-white">Admin Panel</h1>
+                <h1 className="text-[#bc8914] text-3xl font-bold mb-8 text-center md:pt-8 sm:pt-6 pt-4 xl:pt-12">Welcome to Admin Panel</h1>
+                <h2 className="text-[#bc8914] text-2xl font-bold pb-4 sm:pb-6 md:pb-8 xl:pb-12 text-center">Transaction Chart</h2>
+                <div id='chart' className="w-full mx-auto flex flex-col md:flex-row md:justify-center md:items-center gap-8">
+                    <div className="w-full md:w-2/3 mb-8 md:mb-0">
+                        <CardLineChart data={lineChartData} />
+                    </div>
+                    <div className="w-full md:w-1/3">
+                        <div className="flex flex-col md:gap-8">
+                            <div className="w-full mb-8 md:mb-0">
+                                <CardBarChart data={barChartData} />
+                            </div>
+                            <div className="w-full">
+                                <CardBarChartChannel data={barChartChannelData} />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="w-full">
+                    <h2 id='user' className="text-[#bc8914] text-2xl font-bold pb-4 sm:pb-6 md:pb-8 xl:pb-12 text-center md:pt-8 sm:pt-6 pt-4 xl:pt-12">All Users</h2>
                     <div className="overflow-x-auto">
-                        <h2 className="text-lg font-bold mb-2 text-white">All Users</h2>
-                        <table className="w-full divide-y divide-gray-200">
-                            <thead className="bg-gray-50">
+                        <table className="w-full table-auto">
+                            <thead>
                                 <tr>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Role</th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Two Factor</th>
+                                    <th className="text-[#bc8914] px-4 py-2">Name</th>
+                                    <th className="text-[#bc8914] px-4 py-2">Email</th>
+                                    <th className="text-[#bc8914] px-4 py-2">Role</th>
+                                    <th className="text-[#bc8914] px-4 py-2">Two Factor</th>
                                 </tr>
                             </thead>
-                            <tbody className="bg-white divide-y divide-gray-200">
-                                {users.map((user: User) => (
-                                    <tr key={user.id}>
-                                        <td className="px-6 py-4 whitespace-nowrap">{user.name}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap">{user.email}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap">{user.role}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap">{user.isTwoFactorEnabled ? 'Enabled' : 'Disabled'}</td>
+                            <tbody>
+                                {fetchedUsers.map((user: User) => (
+                                    <tr key={user.id} className="odd:bg-gray-800 even:bg-gray-700">
+                                        <td className="px-4 py-2">{user.name}</td>
+                                        <td className="px-4 py-2">{user.email}</td>
+                                        <td className="px-4 py-2">{user.role}</td>
+                                        <td className="px-4 py-2">{user.isTwoFactorEnabled ? 'Enabled' : 'Disabled'}</td>
                                     </tr>
                                 ))}
                             </tbody>
                         </table>
                     </div>
                 </div>
-                <div>
-                    <h2 className="text-lg font-bold mb-2 text-white">All Transactions</h2>
+                <div className="w-full">
+                    <h2 id='transaction' className="text-[#bc8914] text-2xl font-bold pb-4 sm:pb-6 md:pb-8 xl:pb-12 text-center md:pt-8 sm:pt-6 pt-4 xl:pt-12">All Transactions</h2>
                     <div className="overflow-x-auto">
-                        <table className="w-full divide-y divide-gray-200">
-                            <thead className="bg-gray-50">
+                        <table className="w-full table-auto">
+                            <thead>
                                 <tr>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Order Id</th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+                                    <th className="text-[#bc8914] px-4 py-2">Order Id</th>
+                                    <th className="text-[#bc8914] px-4 py-2">Email</th>
+                                    <th className="text-[#bc8914] px-4 py-2">Transaction Type</th>
+                                    <th className="text-[#bc8914] px-4 py-2">Payment Method</th>
+                                    <th className="text-[#bc8914] px-4 py-2">Amount</th>
+                                    <th className="text-[#bc8914] px-4 py-2">Transaction Status</th>
+                                    <th className="text-[#bc8914] px-4 py-2">Transaction ID</th>
+                                    <th className="text-[#bc8914] px-4 py-2">Date Time</th>
                                 </tr>
                             </thead>
-                            <tbody className="bg-white divide-y divide-gray-200">
-                                {transactions.map((transaction: Transaction) => (
-                                    <tr key={transaction.Order_ID}>
-                                        <td className="px-6 py-4 whitespace-nowrap">{transaction.Order_ID}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap">{transaction.Customer_e_mail}</td>
+                            <tbody>
+                                {fetchedTransactions.map((transaction: Transaction) => (
+                                    <tr key={transaction.Order_ID} className="odd:bg-gray-800 even:bg-gray-700">
+                                        <td className="px-4 py-2">{transaction.Order_ID}</td>
+                                        <td className="px-4 py-2">{transaction.Customer_e_mail}</td>
+                                        <td className="px-4 py-2">{transaction.Transaction_type}</td>
+                                        <td className="px-4 py-2">{transaction.Channel}</td>
+                                        <td className="px-4 py-2">Rp. {transaction.Amount}</td>
+                                        <td className="px-4 py-2">{transaction.Transaction_status}</td>
+                                        <td className="px-4 py-2">{transaction.Transaction_ID}</td>
+                                        <td className="px-4 py-2">{new Date(transaction.Date_time).toLocaleString()}</td>
                                     </tr>
                                 ))}
                             </tbody>

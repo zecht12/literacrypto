@@ -76,7 +76,7 @@ model Transaction {
   Order_ID           String    @id @default(cuid()) @map("Order ID")
   Channel            String?
   Transaction_type   String?   @map("Transaction type")
-  Amount             BigInt?
+  Amount             String?
   Transaction_status String?   @map("Transaction status")
   Transaction_ID     String?   @map("Transaction ID")
   Transaction_time   DateTime? @map("Transaction time") @db.Timestamptz(6)

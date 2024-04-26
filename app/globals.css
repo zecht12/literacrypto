@@ -6,6 +6,12 @@ html,body,:root{
   height: 100%;
 }
 
+.table-container {
+  overflow-x: auto;
+  width: 100%;
+}
+
+
 @layer base {
   :root {
     --background: 0 0% 100%;
