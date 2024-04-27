@@ -72,16 +72,21 @@ model TwoFactorConfirmation {
 }
 
 model Transaction {
-  Date_time          DateTime? @map("Date & time") @db.Timestamptz(6)
-  Order_ID           String    @id @default(cuid()) @map("Order ID")
-  Channel            String?
-  Transaction_type   String?   @map("Transaction type")
-  Amount             String?
-  Transaction_status String?   @map("Transaction status")
-  Transaction_ID     String?   @map("Transaction ID")
-  Transaction_time   DateTime? @map("Transaction time") @db.Timestamptz(6)
-  Customer_e_mail    String?   @map("Customer e-mail")
-  Note               String?
+  id            String   @id @default(cuid())
+  customersName String
+  email         String
+  phone         String
+  productName   String
+  amount        String
+  quantity      Int
+  dateTime      DateTime @default(now())
+  status        Status   @default(Pending)
+}
+
+enum Status {
+  Pending
+  Success
+  Failed
 }
 
 enum UserRole {

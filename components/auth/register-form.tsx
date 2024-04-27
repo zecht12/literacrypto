@@ -14,7 +14,6 @@ import { register } from "../../actions/register";
 import { useState, useTransition } from "react";
 
 export const RegisterForm = () => {
-
     const [error, setError] = useState<string | undefined>("");
     const [success, setSuccess] = useState<string | undefined>("");
     const [isPending, startTransition] = useTransition();

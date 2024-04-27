@@ -6,6 +6,15 @@ export const FavoriteSchema = z.object({
     image: z.optional(z.string().url()),
 })
 
+export const CheckoutSchema = z.object({
+    customersName: z.optional(z.string()),
+    email: z.optional(z.string().email()),
+    phone: z.optional(z.string()),
+    productName: z.optional(z.string()),
+    amount: z.optional(z.string()),
+    quantity: z.optional(z.number()),
+})
+
 export const SettingsSchema = z.object({
     name: z.optional(z.string()),
     isTwoFactorEnabled: z.optional(z.boolean()),

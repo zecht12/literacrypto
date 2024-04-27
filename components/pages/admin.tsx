@@ -14,8 +14,8 @@ const AdminPage = async () => {
         const totalTransactionsByMonth = Array(12).fill(0);
 
         fetchedTransactions.forEach((transaction) => {
-            const month = new Date(transaction.Date_time).getMonth();
-            totalTransactionsByMonth[month] += transaction.Amount;
+            const month = new Date(transaction.dateTime).getMonth();
+            totalTransactionsByMonth[month] += transaction.amount;
         });
 
         return totalTransactionsByMonth;
@@ -54,8 +54,8 @@ const AdminPage = async () => {
         ]
     };
 
-    const product1Amounts = fetchedTransactions.filter(transaction => transaction.Amount === "350000").length;
-    const product2Amounts = fetchedTransactions.filter(transaction => transaction.Amount === "250000").length;
+    const product1Amounts = fetchedTransactions.filter(transaction => transaction.amount === '350000').length;
+    const product2Amounts = fetchedTransactions.filter(transaction => transaction.amount === '250000').length;
 
     const barChartData = {
         labels: ["Product 1", "Product 2"],
@@ -70,23 +70,34 @@ const AdminPage = async () => {
         ],
     };
 
-    const channels = fetchedTransactions.reduce((acc, transaction) => {
-        acc[transaction.Channel] = (acc[transaction.Channel] || 0) + 1;
-        return acc;
-    }, {});
+    const computeTransactionStatusCount = () => {
+        let pendingCount = 0;
+        let successCount = 0;
+        let failedCount = 0;
+        fetchedTransactions.forEach((transaction) => {
+            switch (transaction.status) {
+                case 'Pending':
+                    pendingCount++;
+                    break;
+                case 'Success':
+                    successCount++;
+                    break;
+                case 'Failed':
+                    failedCount++;
+                    break;
+                default:
+                    break;
+            }
+        });
 
-    const barChartChannelData = {
-        labels: Object.keys(channels),
-        datasets: [
-            {
-                label: 'Transaction Counts',
-                backgroundColor: '#4a5568',
-                borderColor: '#4a5568',
-                data: Object.values(channels),
-                barThickness: 50,
-            },
-        ],
+        return {
+            Pending: pendingCount,
+            Success: successCount,
+            Failed: failedCount
+        };
     };
+
+    const barChartData2 = computeTransactionStatusCount();
 
     return (
         <div className="bg-black text-white min-h-screen w-full py-8 px-4">
@@ -98,13 +109,11 @@ const AdminPage = async () => {
                         <CardLineChart data={lineChartData} />
                     </div>
                     <div className="w-full md:w-1/3">
-                        <div className="flex flex-col md:gap-8">
-                            <div className="w-full mb-8 md:mb-0">
-                                <CardBarChart data={barChartData} />
-                            </div>
-                            <div className="w-full">
-                                <CardBarChartChannel data={barChartChannelData} />
-                            </div>
+                        <div className="w-full mb-8 md:mb-0">
+                            <CardBarChart data={barChartData} />
+                        </div>
+                        <div className="w-full">
+                            <CardBarChartChannel data={barChartData2} />
                         </div>
                     </div>
                 </div>
@@ -140,26 +149,26 @@ const AdminPage = async () => {
                             <thead>
                                 <tr>
                                     <th className="text-[#bc8914] px-4 py-2">Order Id</th>
+                                    <th className="text-[#bc8914] px-4 py-2">Customer Name</th>
                                     <th className="text-[#bc8914] px-4 py-2">Email</th>
-                                    <th className="text-[#bc8914] px-4 py-2">Transaction Type</th>
-                                    <th className="text-[#bc8914] px-4 py-2">Payment Method</th>
+                                    <th className="text-[#bc8914] px-4 py-2">Phone</th>
+                                    <th className="text-[#bc8914] px-4 py-2">Product Name</th>
                                     <th className="text-[#bc8914] px-4 py-2">Amount</th>
-                                    <th className="text-[#bc8914] px-4 py-2">Transaction Status</th>
-                                    <th className="text-[#bc8914] px-4 py-2">Transaction ID</th>
                                     <th className="text-[#bc8914] px-4 py-2">Date Time</th>
+                                    <th className="text-[#bc8914] px-4 py-2">Transaction Status</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {fetchedTransactions.map((transaction: Transaction) => (
-                                    <tr key={transaction.Order_ID} className="odd:bg-gray-800 even:bg-gray-700">
-                                        <td className="px-4 py-2">{transaction.Order_ID}</td>
-                                        <td className="px-4 py-2">{transaction.Customer_e_mail}</td>
-                                        <td className="px-4 py-2">{transaction.Transaction_type}</td>
-                                        <td className="px-4 py-2">{transaction.Channel}</td>
-                                        <td className="px-4 py-2">Rp. {transaction.Amount}</td>
-                                        <td className="px-4 py-2">{transaction.Transaction_status}</td>
-                                        <td className="px-4 py-2">{transaction.Transaction_ID}</td>
-                                        <td className="px-4 py-2">{new Date(transaction.Date_time).toLocaleString()}</td>
+                                    <tr key={transaction.id} className="odd:bg-gray-800 even:bg-gray-700">
+                                        <td className="px-4 py-2">{transaction.id}</td>
+                                        <td className="px-4 py-2">{transaction.customersName}</td>
+                                        <td className="px-4 py-2">{transaction.email}</td>
+                                        <td className="px-4 py-2">{transaction.phone}</td>
+                                        <td className="px-4 py-2">{transaction.productName}</td>
+                                        <td className="px-4 py-2">{transaction.amount}</td>
+                                        <td className="px-4 py-2">{new Date(transaction.dateTime).toLocaleString()}</td>
+                                        <td className={`px-4 py-2 ${transaction.status === 'Success' ? 'text-green-500' : transaction.status === 'Failed' ? 'text-red-500' : ''}`}>{transaction.status}</td>
                                     </tr>
                                 ))}
                             </tbody>
