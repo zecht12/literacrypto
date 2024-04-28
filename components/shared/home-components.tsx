@@ -39,8 +39,8 @@ const Homecomponents = () => {
                     Kami disini memberikan panduan dan saran-saran terbaik yang dapat menjadi pemandu kamu ketika pertama kali memasuki market.
                 </p>
                 <ul className='flex items-center md:justify-start justify-center'>
-                    <Link href='#membership' className='rounded-full bg-slate-100 hover:bg-blue-400'>
-                        <li className={cn('text-sm text-black uppercase md:px-16 sm:px-20 px-28 py-4', button.className)}>
+                    <Link href='#membership' className='rounded-full bg-slate-100 flex justify-center items-center h-[50px] md:w-[300px] sm:w-[290px] w-[280px] hover:bg-blue-400'>
+                        <li className={cn('md:text-sm text-xs text-black text-center uppercase', button.className)}>
                             Lebih Lanjut
                         </li>
                     </Link>
