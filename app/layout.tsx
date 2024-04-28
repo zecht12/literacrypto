@@ -5,6 +5,7 @@ import './globals.css'
 import Footer from '../components/shared/footer'
 import About from '../components/shared/about'
 import Navbar from '../components/shared/navbar'
+import { AnimatePresence } from 'framer-motion'
 
 export const metadata: Metadata = {
   title: 'LiteraCrypto',
