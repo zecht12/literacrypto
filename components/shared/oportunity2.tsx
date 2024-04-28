@@ -68,7 +68,7 @@ export const Oprtunity2 = () => {
                 <motion.p initial="offscreen" whileInView="onscreen" viewport={{ once: true, amount: 0.8 }} variants={cardVariants} className={cn("text-4xl md:text-7xl text-slate-100 font-bold md:text-justify text-center", head.className)}>
                     Beragam Keuntungan
                 </motion.p>
-                <div className='md:flex justify-start items-center xl:py-20 md:py-16 sm:py-10 py-6 md:space-y-0 md:space-x-8 space-y-4 space-x-0 font-extrabold'>
+                <div className='xl:flex md:grid md:grid-cols-2 sm:grid sm:grid-cols-2 justify-start items-center xl:py-20 md:py-16 sm:py-10 py-6 xl:gap-8 md:gap-6 gap-4 xl:space-y-0 md:space-y-0 sm:space-y-0 space-y-4 font-extrabold'>
                     <motion.div initial="offscreen" whileInView="onscreen" viewport={{ once: true, amount: 0.8 }} variants={cardVariants1} >
                         <Card className='w-[350px]'>
                             <CardHeader className="text-center font-CodecProExtraBold text-xl">

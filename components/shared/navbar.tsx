@@ -1,50 +1,54 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import React from 'react'
-import { Button } from '../ui/button';
-import { Open_Sans } from 'next/font/google';
-import { cn } from '../../lib/utils';
+import { useState, useEffect } from 'react'
+import Image from 'next/image'
+import Link from 'next/link'
+import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai'
+import { cn } from '../../lib/utils'
+import { Open_Sans } from 'next/font/google'
 
 const button = Open_Sans({
     subsets: ["latin"],
     weight: ["800"]
 })
 
-const Navbar = () => {
+
+
+export default function Navbar() {
     return (
-        <div className="fixed xl:w-full md:w-full sm:w-full w-auto flex items-center justify-center h-20 z-100">
-            <div className='flex md:justify-between justify-evenly items-center w-full h-full px-4 xl:px-16 md:px-12 sm:px-8'>
-                <div className='flex md:justify-between justify-evenly items-center'>
+        <div className=" fixed w-full shadow-xl h-20 z-[100]">
+            <div className='flex justify-between items-center w-full h-full px-6 2xl:px-16 '>
+                <div className='flex items-center justify-start'>
                     <Image src="/images/logo.png" alt="image" width={40} height={40} className='rounded-full' />
-                    <h1 className=' font-CodecProExtraBold text-xl text-slate-100'>LiteraCrypto</h1>
+                    <h1 className='font-CodecProExtraBold md:text-2xl text-slate-100'>LiteraCrypto</h1>
                 </div>
-                <ul className='hidden md:flex items-center justify-center'>
-                    <Link href='/'>
-                        <li className='ml-10 text-sm font-CodecProBold text-slate-100 uppercase hover:text-blue-400 '>
-                            HOME
+                <div>
+                    <ul className='flex md:hidden'>
+                        <li className={cn('md:ml-10 rounded-full bg-slate-100 hover:bg-blue-400')}>
+                            <Link href='#membership'>
+                                <p className={cn('text-sm text-black uppercase md:px-8 px-4 py-2', button.className)}>Daftar</p>
+                            </Link>
                         </li>
-                    </Link>
-                    <Link href='/#oportunity'>
-                        <li className='ml-10 text-sm font-CodecProBold text-slate-100 uppercase hover:text-blue-400 '>
-                            Keuntungan
+                    </ul>
+                </div>
+                <div>
+                    <ul className='md:flex hidden justify-between items-center gap-8'>
+                        <li className='md:ml-10 text-sm font-CodecProBold text-slate-100 uppercase hover:text-blue-400 '>
+                            <Link href='/'>
+                                <p>HOME</p>
+                            </Link>
                         </li>
-                    </Link>
-                    <Link href='#membership' className='rounded-full bg-slate-100 hover:bg-blue-400 ml-10'>
-                        <li className={cn('text-sm text-black uppercase px-8 py-2',button.className)}>
-                            Daftar
+                        <li className='md:ml-10 text-sm font-CodecProBold text-slate-100 uppercase hover:text-blue-400 '>
+                            <Link href='/#opportunity'>
+                                <p>Keuntungan</p>
+                            </Link>
                         </li>
-                    </Link>
-                </ul>
-                <ul className='md:hidden flex items-center justify-center'>
-                    <Link href='#membership' className='rounded-full bg-slate-100 hover:bg-blue-400 ml-10'>
-                        <li className={cn('text-sm text-black uppercase px-8 py-2',button.className)}>
-                            Daftar
+                        <li className={cn('md:ml-10 rounded-full bg-slate-100 hover:bg-blue-400')}>
+                            <Link href='#membership'>
+                                <p className={cn('text-sm text-black uppercase md:px-8 px-4 py-2', button.className)}>Daftar</p>
+                            </Link>
                         </li>
-                    </Link>
-                </ul>
+                    </ul>
+                </div>
             </div>
         </div>
     )
 }
-
-export default Navbar;
