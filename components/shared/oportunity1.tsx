@@ -4,6 +4,7 @@
 import { cn } from "../../lib/utils";
 import { League_Spartan, Open_Sans, Montserrat, Poppins } from "next/font/google";
 import Image from "next/image";
+import { Variants, motion } from 'framer-motion'
 
 const head = League_Spartan({
     subsets: ["latin"],
@@ -30,16 +31,31 @@ const button = Open_Sans({
     weight: ["500"]
 })
 
+const cardVariants: Variants = {
+    offscreen: {
+        x: -70,
+        opacity: 0
+    },
+    onscreen: {
+        x: 0,
+        opacity:1,
+        transition: {
+            type: "spring",
+            duration: 1.8
+        }
+    }
+};
+
 export default function Oportunity1() {
     return (
         <div id="oportunity" className="w-full h-screen md:bg-image6 bg-image7 md:bg-center bg-right-top bg-cover mx-auto xl:px-16 md:px-12 sm:px-8 px-6 xl:pt-24 md:pt-16 sm:pt-16 pt-12 md:flex flex-none md:justify-start justify-center items-center">
             <div className="w-full">
-                <p className={cn("text-4xl md:text-7xl text-slate-100 font-bold md:max-w-xl max-w-full md:text-justify text-center", head.className)}>
+                <motion.p initial="offscreen" whileInView="onscreen" viewport={{ once: true, amount: 0.8 }} variants={cardVariants} className={cn("text-4xl md:text-7xl text-slate-100 font-bold md:max-w-xl max-w-full md:text-justify text-center", head.className)}>
                     5x Portofolio
-                </p>
-                <p className={cn("text-lg md:text-3xl text-slate-100 font-bold md:max-w-xl max-w-full md:text-start text-justify xl:py-6 md:py-4 sm:py-2 py-4", body.className)}>
+                </motion.p>
+                <motion.p initial="offscreen" whileInView="onscreen" viewport={{ once: true, amount: 0.8 }} variants={cardVariants} className={cn("text-lg md:text-3xl text-slate-100 font-bold md:max-w-xl max-w-full md:text-start text-justify xl:py-6 md:py-4 sm:py-2 py-4", body.className)}>
                     Kami memiliki visi untuk membantu anda dalam mewujudkan mimpi mencapai pertumbuhan portofolio yang realistis dengan target 3-5x lipat.
-                </p>
+                </motion.p>
             </div>
         </div>
     );
