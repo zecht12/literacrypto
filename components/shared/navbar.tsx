@@ -31,14 +31,14 @@ export default function Navbar() {
         };
     }, []);
     return (
-        <div className=" fixed xl:w-full md:w-full sm:w-full flex justify-center items-center w-auto h-20 z-[100]">
+        <div className=" fixed xl:w-full md:w-full sm:w-full xs:w-full flex justify-center items-center w-auto h-20 z-[100]">
             <div className='flex justify-between items-center w-full h-full px-6 2xl:px-16 '>
                 <div className='flex items-center justify-start'>
                     <Image src="/images/logo.png" alt="image" width={40} height={40} className='rounded-full' />
                     <h1 className='font-CodecProExtraBold md:text-2xl text-slate-100'>LiteraCrypto</h1>
                 </div>
                 <div>
-                    <ul className='flex xl:hidden md:hidden sm:hidden'>
+                    <ul className='flex xl:hidden md:hidden sm:hidden xs:hidden'>
                         <li className={cn('md:ml-10 rounded-full bg-slate-100 hover:bg-blue-400')}>
                             <Link href='#membership'>
                                 <p className={cn('text-sm text-black uppercase md:px-8 px-4 py-2', button.className)}>Daftar</p>
@@ -47,7 +47,7 @@ export default function Navbar() {
                     </ul>
                 </div>
                 <div>
-                    <ul className='xl:flex md:flex sm:flex hidden justify-between items-center gap-8'>
+                    <ul className='xl:flex md:flex sm:flex xs:flex hidden justify-between items-center gap-8'>
                         <li className='md:ml-10 text-sm font-CodecProBold text-slate-100 uppercase hover:text-blue-400 '>
                             <Link href='/'>
                                 <p>HOME</p>
