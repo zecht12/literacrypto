@@ -44,8 +44,8 @@ export default function Oportunity3() {
             <div className="flex md:hidden flex-col items-center justify-center space-y-6 w-full md:w-2/6">
                 <Image alt="logo" width="1000" height="1000" src="/images/Assets1.jpeg" className="w-[350px] h-[300px] rounded-xl" />
                 <Image alt="logo" width="1000" height="1000" src="/images/Assets2.jpeg" className="w-[350px] h-[300px] rounded-xl" />
-                <Image alt="logo" width="1000" height="1000" src="/images/Assets3.jpeg" className="w-[350px] h-[300px] rounded-xl" />
-                <Image alt="logo" width="1000" height="1000" src="/images/Assets4.jpeg" className="w-[350px] h-[300px] rounded-xl" />
+                <Image alt="logo" width="1000" height="1000" src="/images/Assets3.jpeg" className="w-[350px] h-[450px] rounded-xl" />
+                <Image alt="logo" width="1000" height="1000" src="/images/Assets4.jpeg" className="w-[350px] h-[450px] rounded-xl" />
             </div>
         </div>
     );
