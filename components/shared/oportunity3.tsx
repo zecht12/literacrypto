@@ -78,10 +78,10 @@ export default function Oportunity3() {
                         <Image alt="logo" width="1000" height="1000" src="/images/Assets1.jpeg" className="w-[350px] h-[300px] rounded-xl" />
                     </motion.div>
                     <motion.div initial="offscreen" whileInView="onscreen" viewport={{ once: true, amount: 0.8 }} variants={cardVariants1}>
-                        <Image alt="logo" width="1000" height="1000" src="/images/Assets2.jpeg" className="w-[350px] h-[300px] rounded-xl" />
+                        <Image alt="logo" width="1000" height="1000" src="/images/Assets2.jpeg" className="w-[350px] h-[450px] rounded-xl" />
                     </motion.div>
                     <motion.div initial="offscreen" whileInView="onscreen" viewport={{ once: true, amount: 0.8 }} variants={cardVariants1}>
-                        <Image alt="logo" width="1000" height="1000" src="/images/Assets3.jpeg" className="w-[350px] h-[450px] rounded-xl" />
+                        <Image alt="logo" width="1000" height="1000" src="/images/Assets3.jpeg" className="w-[350px] h-[350px] rounded-xl" />
                     </motion.div>
                     <motion.div initial="offscreen" whileInView="onscreen" viewport={{ once: true, amount: 0.8 }} variants={cardVariants1}>
                         <Image alt="logo" width="1000" height="1000" src="/images/Assets4.jpeg" className="w-[350px] h-[450px] rounded-xl" />
