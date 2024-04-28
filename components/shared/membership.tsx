@@ -45,7 +45,7 @@ interface Product {
 
 const cardVariants: Variants = {
     offscreen: {
-        x: -70,
+        x: -50,
         opacity: 0
     },
     onscreen: {
@@ -60,7 +60,7 @@ const cardVariants: Variants = {
 
 const cardVariants1: Variants = {
     offscreen: {
-        x: -70,
+        x: -50,
         opacity: 0
     },
     onscreen: {
