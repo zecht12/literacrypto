@@ -41,7 +41,7 @@ export const Oprtunity2 = () => {
                             Analisa Coin
                         </CardHeader>
                         <CardContent>
-                            <CardDescription className={cn("text-justify",body.className)}>
+                            <CardDescription className={cn("text-justify text-black",body.className)}>
                                 Riset yang mendalam baik secara teknikal maupun fundamental mengenai coin-coin yang berpotensi mengalami kenaikan secara signifikan.
                             </CardDescription>
                         </CardContent>
@@ -51,7 +51,7 @@ export const Oprtunity2 = () => {
                             Materi
                         </CardHeader>
                         <CardContent>
-                            <CardDescription className={cn("text-justify",body.className)}>
+                            <CardDescription className={cn("text-justify text-black",body.className)}>
                                 Riset yang mendalam baik secara teknikal maupun fundamental mengenai coin-coin yang berpotensi mengalami kenaikan secara signifikan.
                             </CardDescription>
                         </CardContent>
@@ -61,7 +61,7 @@ export const Oprtunity2 = () => {
                             Community
                         </CardHeader>
                         <CardContent>
-                            <CardDescription className={cn("text-justify",body.className)}>
+                            <CardDescription className={cn("text-justify text-black",body.className)}>
                                 Riset yang mendalam baik secara teknikal maupun fundamental mengenai coin-coin yang berpotensi mengalami kenaikan secara signifikan.
                             </CardDescription>
                         </CardContent>
