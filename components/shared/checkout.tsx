@@ -12,6 +12,33 @@ import { Input } from '../ui/input';
 import { AlertDialog, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogHeader, AlertDialogTrigger } from '../ui/alert-dialog';
 import Link from 'next/link';
 import { Card, CardContent } from '../ui/card';
+import { League_Spartan, Montserrat, Open_Sans, Poppins } from 'next/font/google';
+import { cn } from '../../lib/utils';
+
+const head = League_Spartan({
+    subsets: ["latin"],
+    weight: ["700"]
+});
+
+const subHead = Poppins({
+    subsets: ["latin"],
+    weight: ["600"]
+})
+
+const body = Montserrat({
+    subsets: ["latin"],
+    weight: ["400"]
+});
+
+const bodyBold = Montserrat({
+    subsets: ["latin"],
+    weight: ["600"]
+});
+
+const button = Open_Sans({
+    subsets: ["latin"],
+    weight: ["700"]
+})
 
 const Checkout = ({ product }) => {
     const [error, setError] = useState<string | undefined>("");
@@ -22,10 +49,10 @@ const Checkout = ({ product }) => {
         defaultValues: {
             email: "",
             customersName: "",
-            phone:"",
+            phone: "",
             amount: `${product.description}` || "",
-            productName:product.name || "",
-            quantity:1,
+            productName: product.name || "",
+            quantity: 1,
         }
     });
 
@@ -43,19 +70,22 @@ const Checkout = ({ product }) => {
                 });
         });
     };
-    
+
+    const cardClassName = product.name === "Promo 100 Orang Pertama" ? 'bg-gradient-to-r from-black to-[#c89116] border-y-2 border-[#494949]' : 'bg-gradient-to-r from-[#aeaeae] to-[#fefefe]';
 
     return (
         <AlertDialog>
             <AlertDialogTrigger>
-                <Card key={product.id} className='bg-gray-400'>
+                <Card key={product.id} className={cardClassName}>
                     <CardContent>
-                        <h3 className="mt-4 text-lg font-medium text-gray-900">
+                        <h3 className={cn("mt-4 text-lg font-medium", product.name === "Promo 100 Orang Pertama" ? "text-slate-100" : "text-gray-700", subHead.className)}>
                             {product.name}
                         </h3>
-                        <p className="mt-1.5 text-sm text-gray-700">{parseFloat(product.price).toLocaleString("id-ID", { style: "currency", currency: "IDR" })}</p>
-                        <p className="py-4 text-sm text-gray-700">
-                        {parseFloat(product.description).toLocaleString("id-ID", { style: "currency", currency: "IDR" })}
+                        <p className={cn("pt-1 text-lg line-through decoration-red-600", product.name === "Promo 100 Orang Pertama" ? "text-slate-100 decoration-slate-100" : "text-gray-700 decoration-gray-700", button.className)}>
+                            {parseFloat(product.price).toLocaleString("us-Us", { style: "currency", currency: "USD" })}
+                        </p>
+                        <p className={cn("py-2 text-2xl", product.name === "Promo 100 Orang Pertama" ? "text-[#ffde59]" : "text-[#c89116]", button.className)}>
+                            {parseFloat(product.description).toLocaleString("us-Us", { style: "currency", currency: "USD" })}
                         </p>
                     </CardContent>
                 </Card>

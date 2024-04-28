@@ -6,15 +6,21 @@ export async function fetchProducts() {
             return resolve([
                 {
                     id: uuidv4(),
-                    name: "Product 1",
-                    price: 350000,
-                    description: 250000,
+                    name: "Promo 100 Orang Pertama",
+                    price: 20,
+                    description: 10,
                 },
                 {
                     id: uuidv4(),
-                    name: "Product 2",
-                    price: 250000,
-                    description: 150000,
+                    name: "1 Bulan Membership",
+                    price: 20,
+                    description: 15,
+                },
+                {
+                    id: uuidv4(),
+                    name: "3 Bulan Membership",
+                    price: 60,
+                    description: 40,
                 },
             ]);
         }, 1000);

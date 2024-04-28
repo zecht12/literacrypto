@@ -1,13 +1,10 @@
 import type { Metadata } from 'next'
-import { Poppins } from 'next/font/google'
 import { SessionProvider } from 'next-auth/react'
 import { auth } from '../auth'
 import './globals.css'
-
-const inter = Poppins({
-  subsets: ["latin"],
-  weight: '400'
-})
+import Footer from '../components/shared/footer'
+import About from '../components/shared/about'
+import Navbar from '../components/shared/navbar'
 
 export const metadata: Metadata = {
   title: 'LiteraCrypto',
@@ -24,8 +21,11 @@ export default async function RootLayout({
   return (
     <SessionProvider session={session}>
       <html lang="en">
-        <body className={inter.className}>
+        <body>
+          <Navbar/>
           {children}
+          <About/>
+          <Footer/>
         </body>
       </html>
     </SessionProvider>

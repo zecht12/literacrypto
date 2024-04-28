@@ -1,14 +1,6 @@
 import type { Metadata } from 'next'
-import { Poppins } from 'next/font/google'
 import '../../globals.css'
 import AdminNavbar from '../../../components/shared/admin-navbar'
-
-
-
-const inter = Poppins({
-    subsets: ["latin"],
-    weight: '400'
-})
 
 export const metadata: Metadata = {
     title: 'LiteraCrypto',
@@ -23,7 +15,7 @@ export default async function ProtectedLayout({
 
     return (
         <html lang="en">
-            <body className={inter.className}>
+            <body >
                 <AdminNavbar/>
                 {children}
             </body>

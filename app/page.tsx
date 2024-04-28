@@ -1,8 +1,8 @@
-import CheckoutPage from '../components/pages/checkoutpage'
+import Homepage from "../components/pages/homepage";
+
 
 export default function Home() {
-    
     return (
-        <CheckoutPage/>
+        <Homepage/>
     );
 }

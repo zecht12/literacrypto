@@ -5,6 +5,17 @@ import { db } from '../../lib/db';
 import CardLineChart from '../shared/card-line-chart';
 import CardBarChart from '../shared/card-bar-chart';
 import CardBarChartChannel from '../shared/card-bar-chart-channel';
+import { Poppins } from 'next/font/google';
+
+const head = Poppins({
+    subsets: ["latin"],
+    weight: ["800"]
+});
+
+const body = Poppins({
+    subsets: ["latin"],
+    weight: ["400"]
+});
 
 const AdminPage = async () => {
     const fetchedUsers = await db.user.findMany();
