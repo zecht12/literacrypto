@@ -64,7 +64,7 @@ const cardVariants1: Variants = {
 export const Oprtunity2 = () => {
     return (
         <div className="w-full md:h-screen h-auto bg-image3 bg-center mx-auto xl:px-16 md:px-12 sm:px-8 px-6 xl:pt-24 md:pt-16 sm:pt-16 pt-12">
-            <div className='flex flex-col md:justify-end md:items-start justify-center items-center'>
+            <div className='w-full h-full flex flex-col md:justify-end md:items-start justify-center items-center'>
                 <motion.p initial="offscreen" whileInView="onscreen" viewport={{ once: true, amount: 0.8 }} variants={cardVariants} className={cn("text-4xl md:text-7xl text-slate-100 font-bold md:text-justify text-center", head.className)}>
                     Beragam Keuntungan
                 </motion.p>

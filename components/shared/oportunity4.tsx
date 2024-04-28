@@ -49,7 +49,7 @@ const cardVariants: Variants = {
 export default function Oportunity4() {
     return (
         <div className="w-full md:h-screen h-[95vh] md:bg-image9 bg-image10 bg-center bg-cover mx-auto xl:px-16 md:px-12 sm:px-8 px-6 xl:pt-24 md:pt-16 sm:pt-16 pt-12 md:flex flex-none md:justify-start justify-center items-center">
-            <div className="w-full">
+            <div className="w-full h-full">
                 <motion.p initial="offscreen" whileInView="onscreen" viewport={{ once: true, amount: 0.8 }} variants={cardVariants} className={cn("text-4xl md:text-7xl text-slate-100 font-bold md:max-w-xl max-w-full md:text-justify text-center", head.className)}>
                     AirDrop
                 </motion.p>

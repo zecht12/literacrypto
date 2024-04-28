@@ -88,7 +88,7 @@ export default function Membership() {
 
     return (
         <div id="membership" className="w-full md:h-screen h-auto bg-image5 bg-center mx-auto xl:px-16 md:px-12 sm:px-8 px-6 xl:py-16 md:py-12 sm:py-8 py-12">
-            <div className="md:flex flex-none md:justify-between justify-center items-center">
+            <div className="w-full h-full md:flex md:justify-between justify-center items-center">
                 <div className="w-full md:w-4/6">
                     <motion.p initial="offscreen" whileInView="onscreen" viewport={{ once: true, amount: 0.8 }} variants={cardVariants} className={cn("text-4xl md:text-7xl text-slate-100 font-bold md:max-w-xl max-w-full md:text-justify text-center", head.className)}>
                         Our Membership
