@@ -48,7 +48,7 @@ const cardVariants: Variants = {
 
 const cardVariants1: Variants = {
     offscreen: {
-        x: 70,
+        x: -70,
         opacity: 0
     },
     onscreen: {

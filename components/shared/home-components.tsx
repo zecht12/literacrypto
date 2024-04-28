@@ -48,7 +48,7 @@ const cardVariants: Variants = {
 
 const Homecomponents = () => {
     return (
-        <div className="w-full h-screen bg-image1 bg-center flex md:justify-start justify-center items-center mx-auto xl:px-16 md:px-12 sm:px-8 px-6 xl:pt-24 md:pt-16 sm:pt-16 pt-0">
+        <div className="w-full h-screen bg-image1 bg-center flex md:justify-start justify-center items-center mx-auto xl:px-16 md:px-12 sm:px-8 px-6 xl:pt-24 md:pt-16 sm:pt-16 pt-28">
             <div className="w-full h-full md:w-5/6">
                 <motion.p initial="offscreen" whileInView="onscreen" viewport={{ once: true, amount: 0.8 }} variants={cardVariants} className={cn("text-4xl md:text-7xl text-slate-100 font-bold max-w-full md:text-start text-center", head.className)}>
                     Dapatkan Profit Maksimal Bersama Kami
@@ -57,7 +57,7 @@ const Homecomponents = () => {
                     Kami disini memberikan panduan dan saran-saran terbaik yang dapat menjadi pemandu kamu ketika pertama kali memasuki market.
                 </motion.p>
                 <motion.ul initial="offscreen" whileInView="onscreen" viewport={{ once: true, amount: 0.8 }} variants={cardVariants} className='flex items-center md:justify-start justify-center'>
-                    <Link href='#membership' className='rounded-full bg-slate-100 flex justify-center items-center h-[50px] md:w-[300px] sm:w-[290px] w-[280px] hover:bg-blue-400'>
+                    <Link href='#membership' className='rounded-full bg-slate-100 flex justify-center items-center h-[50px] md:w-[300px] w-[400px] hover:bg-blue-400'>
                         <li className={cn('md:text-sm text-xs text-black text-center uppercase', button.className)}>
                             Lebih Lanjut
                         </li>
