@@ -11,7 +11,7 @@ import { AnimatePresence } from 'framer-motion'
 
 const Homepage = () => {
   return (
-    <AnimatePresence>
+    <AnimatePresence >
       <Homecomponents/>
       <Oportunity1/>
       <Oprtunity2/>

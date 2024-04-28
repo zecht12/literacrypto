@@ -38,8 +38,8 @@ export default function Navbar() {
                     <h1 className='font-CodecProExtraBold md:text-2xl text-slate-100'>LiteraCrypto</h1>
                 </div>
                 <div>
-                    <ul className='flex xl:hidden md:hidden items-center justify-center'>
-                        <li className={cn('rounded-full bg-slate-100 hover:bg-blue-400')}>
+                    <ul className='flex md:hidden items-center justify-center'>
+                        <li className={cn('ml-10 rounded-full bg-slate-100 hover:bg-blue-400')}>
                             <Link href='#membership'>
                                 <p className={cn('text-sm text-black uppercase md:px-8 px-4 py-2', button.className)}>Daftar</p>
                             </Link>
