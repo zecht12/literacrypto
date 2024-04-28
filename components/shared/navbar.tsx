@@ -12,9 +12,9 @@ const button = Open_Sans({
 
 const Navbar = () => {
     return (
-        <div className="fixed w-full h-20 z-100">
-            <div className='flex justify-between items-center w-full h-full px-4 xl:px-16 md:px-12 sm:px-8'>
-                <div className='flex justify-between items-center'>
+        <div className="fixed w-screen h-20 z-100">
+            <div className='flex md:justify-between justify-evenly items-center w-full h-full px-4 xl:px-16 md:px-12 sm:px-8'>
+                <div className='flex md:justify-between justify-evenly items-center'>
                     <Image src="/images/logo.png" alt="image" width={40} height={40} className='rounded-full' />
                     <h1 className=' font-CodecProExtraBold text-xl text-slate-100'>LiteraCrypto</h1>
                 </div>
