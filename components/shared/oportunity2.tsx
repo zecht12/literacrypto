@@ -48,12 +48,12 @@ const cardVariants: Variants = {
 
 const cardVariants1: Variants = {
     offscreen: {
-        x: -50,
+        y: 50,
         opacity: 0
     },
     onscreen: {
-        x: 0,
-        opacity: 1,
+        y: 0,
+        opacity:1,
         transition: {
             type: "spring",
             duration: 1.8

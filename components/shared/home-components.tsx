@@ -33,7 +33,7 @@ const button = Open_Sans({
 
 const cardVariants: Variants = {
     offscreen: {
-        y: -70,
+        y: -50,
         opacity: 0
     },
     onscreen: {
