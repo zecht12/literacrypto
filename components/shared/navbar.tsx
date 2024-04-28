@@ -31,7 +31,7 @@ export default function Navbar() {
         };
     }, []);
     return (
-        <div className=" fixed xl:w-full md:w-full sm:w-full xs:w-full flex justify-center items-center w-auto h-20 z-[100]">
+        <div className=" fixed w-full flex justify-center items-center h-20 z-[100]">
             <div className='flex justify-between items-center w-full h-full px-6 2xl:px-16 '>
                 <div className='flex items-center justify-start'>
                     <Image src="/images/logo.png" alt="image" width={40} height={40} className='rounded-full' />
