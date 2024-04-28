@@ -40,7 +40,7 @@ const Homecomponents = () => {
                 </p>
                 <ul className='flex items-center md:justify-start justify-center'>
                     <Link href='#membership' className='rounded-full bg-slate-100 hover:bg-blue-400'>
-                        <li className={cn('text-sm text-black uppercase md:px-16 px-28 py-4', button.className)}>
+                        <li className={cn('text-sm text-black uppercase md:px-16 sm:px-20 px-28 py-4', button.className)}>
                             Lebih Lanjut
                         </li>
                     </Link>
