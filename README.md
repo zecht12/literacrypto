@@ -71,7 +71,7 @@ This section also provides the platform's social media handles, encouraging user
 
 ## Getting Started
 
-To get started with LiteraCrypto, visit our [website](https://literacrypto.vercel.app) and sign up for an account.
+To get started with LiteraCrypto, visit our [website](https://literacrypto.vercel.app).
 
 ## Contributing
 
