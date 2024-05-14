@@ -6,7 +6,7 @@ LiteraCrypto is a platform that provides users with the best guidance and advice
 
 ### Screenshot 1
 
-![Screenshot1](public/images/Screenshot1.png)
+![Screenshot1](public/images/Screenshot.png)
 
 **Description:**
 The first screenshot displays the homepage of LiteraCrypto. The primary focus is on a welcoming message written in Indonesian, which translates to "Get Maximum Profit With Us." The text below further explains that the platform offers the best guidance and advice to users, especially those entering the market for the first time. The call-to-action button labeled "LEBIH LANJUT" invites users to learn more about the services provided.
